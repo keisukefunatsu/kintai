@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'teachers', to: 'teachers#index'
+
   root to: 'users#index'
   resources :users
   resources :users do
