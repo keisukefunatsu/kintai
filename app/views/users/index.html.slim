@@ -9,25 +9,42 @@ table.table
   thead
     tr
       th
+        | 番号
+      th
         | 名前
       th        
+      th
+      th
       th
       th
       
   tbody
     - @users.each do |user|
+      - if user.present == '1'
+        - presence = '出席中'
+        - disable1 = 'disabled'
+        - disable2 = ''
+      - elsif user.present == '2'
+        - presence = '帰宅済み'
+        - disable1 = 'disabled'
+        - disable2 = 'disabled'
+      - elsif user.present == '3'
+        - presence = '未出席'  
+        - disable2 = 'disabled'
       tr
+        td  
+          = user.id
         td
-          = user.name        
+          = "#{user.name}[#{presence}]"
         td
-          = link_to '出席', new_user_in_date_path(user), class: 'btn btn-success active'
+          = link_to '出席', new_user_in_date_path(user), class: "btn btn-success active #{disable1}"
         td
-          = link_to '退出', new_user_out_date_path(user), class: 'btn btn-info active'
+          = link_to '帰ります', new_user_out_date_path(user), class: "btn btn-info active #{disable2}"
         td
-          = link_to '出席履歴', user, class: 'btn btn-primary active'
+          = link_to '出席履歴', user, class: "btn btn-primary active"
         / td
-          / = link_to 'Edit', edit_user_path(user)
-        / td
-          / = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to '編集', edit_user_path(user), class: 'btn btn-warning disabled'
+        td
+          = link_to '先生用', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger disabled'
 / br
-/ = link_to '新規生徒追加', new_user_path, class: 'btn btn-primary'
+= link_to '新規生徒追加', new_user_path, class: 'btn btn-primary disabled'

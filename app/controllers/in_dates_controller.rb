@@ -5,6 +5,7 @@ class InDatesController < ApplicationController
     @time = Time.current
     @status = 'in'
     PostMailer.post_email(@user, @status, @time).deliver
-    redirect_to root_path, notice: '出欠確認メールを送信しました'
+    @user.update(present: '1')
+    redirect_to root_path, notice: '出席メールを送信しました'
   end
 end

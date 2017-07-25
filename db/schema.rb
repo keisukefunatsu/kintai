@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720225748) do
+ActiveRecord::Schema.define(version: 20170725074613) do
 
   create_table "attend_dates", force: :cascade do |t|
     t.integer "user_id_id"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170720225748) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "present", default: "3", null: false
   end
 
 end
