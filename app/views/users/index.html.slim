@@ -14,7 +14,7 @@ table.table
         | 名前
       th        
       th
-      th
+      / th
       / th
       / th
       
@@ -40,8 +40,8 @@ table.table
           = link_to '出席', new_user_in_date_path(user), class: "btn btn-success active #{disable1}"
         td
           = link_to '帰ります', new_user_out_date_path(user), class: "btn btn-info active #{disable2}"
-        td
-          = link_to '出席履歴', user, class: "btn btn-primary active"
+        / td
+          / = link_to '出席履歴', user, class: "btn btn-primary active"
         / td
           / = link_to '編集', edit_user_path(user), class: 'btn btn-warning disabled'
         / td
