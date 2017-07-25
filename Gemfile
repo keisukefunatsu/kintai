@@ -38,9 +38,12 @@ gem "jquery-rails"
 # Use BootStrap
 gem 'bootstrap', '~> 4.0.0.alpha6'
 
+# Pagenation
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
+
 # Use slim template
 gem 'slim-rails'
-
 
 # Convert  erb to slim
 gem 'html2slim'

@@ -1,6 +1,10 @@
 
 h1
   | 出欠確認
+strong
+ | 塾に来たら、自分の名前を探して出席ボタンを押してね
+ 
+ = paginate @users, theme: 'twitter-bootstrap-4'
 table.table
   thead
     tr
