@@ -1,0 +1,2 @@
+module OutDatesHelper
+end

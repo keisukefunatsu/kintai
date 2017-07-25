@@ -1,0 +1,29 @@
+
+h1
+  | 出欠確認
+table.table
+  thead
+    tr
+      th
+        | 名前
+      th        
+      th
+      th
+      
+  tbody
+    - @users.each do |user|
+      tr
+        td
+          = user.name        
+        td
+          = link_to '出席', new_user_in_date_path(user), class: 'btn btn-success active'
+        td
+          = link_to '退出', new_user_out_date_path(user), class: 'btn btn-info active'
+        td
+          = link_to '出席履歴', user, class: 'btn btn-primary active'
+        / td
+          / = link_to 'Edit', edit_user_path(user)
+        / td
+          / = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+/ br
+/ = link_to '新規生徒追加', new_user_path, class: 'btn btn-primary'

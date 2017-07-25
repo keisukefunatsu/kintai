@@ -1,0 +1,15 @@
+h2 出欠確認メール
+
+- if @status == 'in'
+  p 
+   | #{@user.name}さんが塾に来たことをお知らせいたします。
+
+  p 
+    | 時間： #{@time}
+    
+- elsif @status == 'out'
+  p 
+   | #{@user.name}さんが塾から出たことをお知らせいたします。
+
+  p 
+    | 時間： #{@time}    

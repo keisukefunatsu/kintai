@@ -1,0 +1,30 @@
+p#notice
+  = notice
+p
+  strong
+    |　氏名:
+  = @user.name
+p
+  strong
+    | メールアドレス:
+  = @user.email
+  
+p
+  strong
+    | 入室履歴
+  - if @user.in_dates.first
+    ul.list-group
+      - @user.in_dates.order(created_at: :desc).limit(5).each do |in_date|     
+        li.list-group-item = in_date.in
+  
+p
+  strong
+    | 退室履歴
+  - if @user.out_dates.first
+    ul.list-group
+      - @user.out_dates.order(created_at: :desc).limit(5).each do |out_date|     
+        li.list-group-item = out_date.out
+    
+= link_to 'Edit', edit_user_path(@user)
+|  | 
+= link_to 'Back', users_path

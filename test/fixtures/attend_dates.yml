@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: one
+  in: 2017-07-19 15:12:55
+  out: 2017-07-19 15:12:55
+
+two:
+  user_id: two
+  in: 2017-07-19 15:12:55
+  out: 2017-07-19 15:12:55
