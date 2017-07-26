@@ -5,7 +5,17 @@ class UsersController < ApplicationController
   # GET /users.json
 
   def index
-    @users = User.order(created_at: :desc).page(params[:page])
+    if params[:grade_id]
+      @grade_id = params[:grade_id]
+      @users = User.where(grade_id: @grade_id).order(created_at: :desc).page(params[:page])
+    else
+      @users = User.order(created_at: :desc).page(params[:page])
+    end
+  end
+
+  def card_read
+    @uuid = params[:uuid]
+    @user = User.find_by(card_uuid: @uuid)
   end
 
   # GET /users/1
@@ -69,6 +79,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :grade_id, :present, :card_uuid)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725090214) do
+ActiveRecord::Schema.define(version: 20170726053054) do
 
   create_table "attend_dates", force: :cascade do |t|
     t.integer "user_id_id"
@@ -28,6 +28,12 @@ ActiveRecord::Schema.define(version: 20170725090214) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_cards_on_user_id"
+  end
+
+  create_table "grades", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "in_dates", force: :cascade do |t|
@@ -48,17 +54,15 @@ ActiveRecord::Schema.define(version: 20170725090214) do
     t.index ["user_id"], name: "index_out_dates_on_user_id"
   end
 
-  create_table "teachers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "present", default: "3", null: false
+    t.integer "grade_id"
+    t.string "card_uuid", default: "", null: false
+    t.index ["grade_id"], name: "index_users_on_grade_id"
   end
 
 end

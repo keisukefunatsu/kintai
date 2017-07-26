@@ -3,13 +3,21 @@ h1
   | 出欠確認
 strong
  | 塾に来たら、自分の名前を探して出席ボタンを押してね
- 
- = paginate @users, theme: 'twitter-bootstrap-4'
+.container
+  .row
+    ul.nav.nav-tabs
+      li.nav-item
+        = link_to '中１', users_grade_path(1), class: "nav-link lead #{'active' if current_page? users_grade_path(1)}" 
+      li.nav-item
+        = link_to '中2', users_grade_path(2), class: "nav-link lead #{'active' if current_page? users_grade_path(2)}" 
+      li.nav-item
+        = link_to '中3', users_grade_path(3), class:"nav-link lead #{'active' if current_page? users_grade_path(3)}"
+= paginate @users, theme: 'twitter-bootstrap-4'
 table.table
   thead
     tr
       th
-        | 番号
+        | 学年
       th
         | 名前
       th        
@@ -33,15 +41,15 @@ table.table
         - disable2 = 'disabled'
       tr
         td  
-          = user.id
+          = user.grade.name if user.grade
         td
           = "#{user.name}[#{presence}]"
         td
-          = link_to '出席', new_user_in_date_path(user), class: "btn btn-success active #{disable1}"
+          = link_to '出席', new_user_in_date_path(user), class: "btn btn-success #{disable1}"
         td
-          = link_to '帰ります', new_user_out_date_path(user), class: "btn btn-info active #{disable2}"
+          = link_to '帰ります', new_user_out_date_path(user), class: "btn btn-info #{disable2}"
         / td
-          / = link_to '出席履歴', user, class: "btn btn-primary active"
+          / = link_to '出席履歴', user, class: "btn btn-primary"
         / td
           / = link_to '編集', edit_user_path(user), class: 'btn btn-warning disabled'
         / td
