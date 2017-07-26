@@ -21,15 +21,6 @@ ActiveRecord::Schema.define(version: 20170726053054) do
     t.index ["user_id_id"], name: "index_attend_dates_on_user_id_id"
   end
 
-  create_table "cards", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "uuid"
-    t.string "pmm"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_cards_on_user_id"
-  end
-
   create_table "grades", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false

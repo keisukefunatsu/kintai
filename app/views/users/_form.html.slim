@@ -9,16 +9,16 @@
           li
             = message
   .field
-    = form.label :name
+    = form.label :氏名
     = form.text_field :name, id: :user_name
   .field
-    = form.label :email
+    = form.label :送信用メールアドレス
     = form.text_field :email, id: :user_email      
+  / .field
+  /   = form.label :カード番号（今のところ不要）
+  /   = form.text_field :card_uuid, id: :user_card_uuid   
   .field
-    = form.label :card_uuid
-    = form.text_field :card_uuid, id: :user_card_uuid   
-  .field
-    = form.label :grade
+    = form.label :学年
     = form.collection_select :grade_id, Grade.all, :id, :name
   .actions
     = form.submit

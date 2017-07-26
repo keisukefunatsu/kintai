@@ -6,12 +6,9 @@ strong
 .container
   .row
     ul.nav.nav-tabs
-      li.nav-item
-        = link_to '中１', users_grade_path(1), class: "nav-link lead #{'active' if current_page? users_grade_path(1)}" 
-      li.nav-item
-        = link_to '中2', users_grade_path(2), class: "nav-link lead #{'active' if current_page? users_grade_path(2)}" 
-      li.nav-item
-        = link_to '中3', users_grade_path(3), class:"nav-link lead #{'active' if current_page? users_grade_path(3)}"
+      - @grade.each do |grade|
+        li.nav-item
+          = link_to grade.name, users_grade_path(grade.id), class:"nav-link lead #{'active' if current_page? users_grade_path(grade.id)}"       
 = paginate @users, theme: 'twitter-bootstrap-4'
 table.table
   thead
