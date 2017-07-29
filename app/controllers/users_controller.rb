@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
-  # GET /users
-  # GET /users.json
+  include ApplicationHelper
 
   def index
     if params[:grade_id]
@@ -17,7 +15,33 @@ class UsersController < ApplicationController
 
   def card_read
     @uuid = params[:uuid]
-    @user = User.find_by(card_uuid: @uuid)
+    @user = User.find_by(card_uuid: @uuid.to_s)
+    if @user
+      if @user.present == '3'
+        # if check_in_date(@user)
+        #   respond_to do |format|
+        #     format.json { render json: 'まだ帰りますボタンは押せません'.to_json }
+        #   end
+        # end
+        create_in_date(@user)
+        respond_to do |format|
+          format.json { render json: "#{@user.name}さんが塾に来ました".to_json }
+        end
+      elsif @user.present == '1'
+        create_out_date(@user)
+        respond_to do |format|
+          format.json { render json: "#{@user.name}さんが帰宅しました".to_json }
+        end
+      elsif @user.present == '2'
+        respond_to do |format|
+          format.json { render json: "#{@user.name}さんは既に帰宅済みです".to_json }
+        end
+      end
+    else
+      respond_to do |format|
+        format.json { render json: 'カードが登録されていなかったか、正常に読み取れませんでした　正しいカードIDを追加して下さい'.to_json }
+      end
+    end
   end
 
   # GET /users/1

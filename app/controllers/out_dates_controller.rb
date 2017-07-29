@@ -1,11 +1,12 @@
 class OutDatesController < ApplicationController
+  include ApplicationHelper
   def new
     @user = User.find(params[:user_id])
-    @user.out_dates.create(user_id: params[:user_id], out: Time.current)
-    @time = Time.current
-    @status = 'out'
-    PostMailer.post_email(@user, @status, @time).deliver
-    @user.update(present: '2')
-    redirect_to root_path, notice: '出欠確認メールを送信しました'
+    if @user
+      create_out_date(@user)
+      redirect_to root_path, notice: '帰宅確認メールを送信しました'
+    else
+      redirect_to root_path, notice: 'ユーザが存在しません'
+    end
   end
 end
