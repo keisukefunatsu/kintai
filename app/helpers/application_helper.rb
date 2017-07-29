@@ -16,9 +16,9 @@ module ApplicationHelper
   end
 
   def check_in_date(user)
-    past_time = user.in_dates.last
+    past_time = user.in_dates.last.in
     current_time = Time.now
-    if current_time - past_time > 5.minutes
+    if ((current_time - past_time)).to_i > 300
       true
     else
       false

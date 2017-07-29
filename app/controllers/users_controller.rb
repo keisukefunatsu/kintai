@@ -18,19 +18,20 @@ class UsersController < ApplicationController
     @user = User.find_by(card_uuid: @uuid.to_s)
     if @user
       if @user.present == '3'
-        # if check_in_date(@user)
-        #   respond_to do |format|
-        #     format.json { render json: 'まだ帰りますボタンは押せません'.to_json }
-        #   end
-        # end
         create_in_date(@user)
         respond_to do |format|
           format.json { render json: "#{@user.name}さんが塾に来ました".to_json }
         end
       elsif @user.present == '1'
-        create_out_date(@user)
-        respond_to do |format|
-          format.json { render json: "#{@user.name}さんが帰宅しました".to_json }
+        if check_in_date(@user)
+          create_out_date(@user)
+          respond_to do |format|
+            format.json { render json: "#{@user.name}さんが帰宅しました".to_json }
+          end
+        else
+          respond_to do |format|
+            format.json { render json: 'まだ帰りますボタンは押せません'.to_json }
+          end
         end
       elsif @user.present == '2'
         respond_to do |format|
