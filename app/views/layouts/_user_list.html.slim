@@ -11,7 +11,10 @@ strong
     ul.nav.nav-tabs
       - @grade.each do |grade|
         li.nav-item
-          = link_to grade.name, users_grade_path(grade.id), class:"nav-link lead #{'active' if current_page? teachers_grade_path(grade.id)}"      
+          - if controller_name == "teachers"
+            = link_to grade.name, teachers_grade_path(grade.id), class:"nav-link lead #{'active' if current_page? teachers_grade_path(grade.id)}"      
+          - else   
+            = link_to grade.name, users_grade_path(grade.id), class:"nav-link lead #{'active' if current_page? users_grade_path(grade.id)}"      
 = paginate @users, theme: 'twitter-bootstrap-4'
 table.table
   thead
