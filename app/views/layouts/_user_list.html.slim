@@ -1,0 +1,65 @@
+/ コントローラ名で分岐するので定義しておく
+- controller_name =  controller.controller_name
+
+h1
+  | 出欠確認
+  
+strong
+ | 塾に来たら、自分の名前を探して出席ボタンを押してね
+.container
+  .row
+    ul.nav.nav-tabs
+      - @grade.each do |grade|
+        li.nav-item
+          = link_to grade.name, teachers_grade_path(grade.id), class:"nav-link lead #{'active' if current_page? teachers_grade_path(grade.id)}"      
+= paginate @users, theme: 'twitter-bootstrap-4'
+table.table
+  thead
+    tr
+      th
+        | 学年
+      th
+        | 名前
+      th        
+      th
+      th
+      th
+      th
+      
+  tbody
+    - @users.each do |user|
+      - if user.present == '1'
+        - status= '塾にいます'
+        - status_class = 'primary'
+      - elsif user.present == '2'
+        - status = '帰宅しました'
+        - status_class = 'success'
+      - elsif user.present == '3'
+        - status = '未出席'  
+        - status_class = 'default'
+
+      tr
+        td  
+          = user.grade.name if user.grade
+        td
+          p 
+            | #{user.name}　
+            span(class="badge badge-pill badge-#{status_class}")
+              |#{status}
+        td
+          - if user.present == '1'
+            = link_to '塾に来ました', new_user_in_date_path(user), class: "btn btn-success disabled"
+          - else 
+            = link_to '塾に来ました', new_user_in_date_path(user), class: "btn btn-success"
+        td
+          = link_to '帰ります', new_user_out_date_path(user), class: "btn btn-info"
+        - if controller_name == "teachers"
+          td
+            = link_to '出席履歴', user, class: "btn btn-primary"
+          td
+            = link_to '編集', edit_user_path(user), class: 'btn btn-warning'
+          td
+            = link_to '削除', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+            
+- if controller_name == "teachers"
+  = link_to '新規生徒追加', new_user_path, class: 'btn btn-primary'
