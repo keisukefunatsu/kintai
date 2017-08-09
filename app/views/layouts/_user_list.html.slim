@@ -55,7 +55,10 @@ table.table
           - else 
             = link_to '塾に来ました', new_user_in_date_path(user), class: "btn btn-success"
         td
-          = link_to '帰ります', new_user_out_date_path(user), class: "btn btn-info"
+          - if user.present == '1'
+            = link_to '帰ります', new_user_out_date_path(user), class: "btn btn-info"
+          - else 
+            = link_to '帰ります', new_user_out_date_path(user), class: "btn btn-info disabled"
         - if controller_name == "teachers"
           td
             = link_to '出席履歴', user, class: "btn btn-primary"
