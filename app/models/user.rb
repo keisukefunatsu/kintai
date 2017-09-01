@@ -10,4 +10,8 @@ class User < ApplicationRecord
   def self.reset_status
     all.update_all(present: '3')
   end
+
+  def self.test
+    puts 'test method'
+  end
 end
